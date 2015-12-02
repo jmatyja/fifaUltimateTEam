@@ -122,10 +122,10 @@ module.exports = function(config) {
 
     };
     getUserAccounts.prototype.Success= function(response, body){
-        var userAccounts = JSON.parse(body)
+
         if(this.successor != null){
-            this.successor.personaId = userAccounts.userAccountInfo.personas[0].personaId;
-            this.successor.personaName = userAccounts.userAccountInfo.personas[0].personaName;
+            this.successor.personaId = body.userAccountInfo.personas[0].personaId;
+            this.successor.personaName = body.userAccountInfo.personas[0].personaName;
             this.successor.ProcessRequest();
         }
     };
@@ -159,8 +159,8 @@ module.exports = function(config) {
         futRequest.ModifyOptions({method: 'POST',  body: JSON.stringify(data)})
     };
     GetSessionId.prototype.Success= function(response, body){
-        var jBody = JSON.parse(body);
-        if(jBody.sid && this.successor){
+
+        if(body.sid && this.successor){
             futRequest.ModifyHeadersConstantly({'X-UT-SID': jBody.sid});
             this.successor.ProcessRequest();
         } else {
