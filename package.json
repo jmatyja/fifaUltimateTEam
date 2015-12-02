@@ -1,0 +1,25 @@
+{
+  "name": "fifaUltimateTeam",
+  "version": "0.0.0",
+  "description": "Ultimate team web-app connector",
+  "main": "futConnector.js",
+  "scripts": {
+    "test": "echo \"Error: not est specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmatyja/fifaUltimateTEam.git"
+  },
+  "keywords": [
+    "ultimate",
+    "team"
+  ],
+  "author": "Janusz Matyja <januszmatyja@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jmatyja/fifaUltimateTEam/issues"
+  },
+  "dependencies": {
+    "request": "~2.67.0"
+  }
+}
