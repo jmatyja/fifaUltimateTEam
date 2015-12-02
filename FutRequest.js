@@ -35,10 +35,11 @@ module.exports = function() {
     FutRequest.prototype.ModifyHeadersConstantly = function(headers){
         this.headersModifiedConstantly = this.merge(this.headersModifiedConstantly, headers);
     };
-    FutRequest.prototype.GetOptions = function(){
-        var options = this.optionsModified;
+    FutRequest.prototype.GetOptions = function(url){
+        var options = this.merge({}, this.optionsModified);
         this.optionsModified = {};
         options.headers = this.GetHeaders();
+        options.url = url;
         return options;
 
     };
@@ -47,15 +48,16 @@ module.exports = function() {
         this.headersModified = {};
         return headers;
     };
-    FutRequest.prototype.MakeRequest = function(successCallback, errorCallback){
-        this.request(this.GetOptions(), function(error, response, body){
+    FutRequest.prototype.MakeRequest = function(url, successCallback, errorCallback){
+        this.request(this.GetOptions(url), function(error, response, body){
             if(error || !response || response.statusCode != '200'){
                 if(undefined != errorCallback && typeof(errorCallback) == 'function'){
-                    errorCallback(error, response);
+                    errorCallback(response, error);
                 }
             } else {
                 successCallback(response, body);
             }
         });
     };
+    return new FutRequest();
 };
